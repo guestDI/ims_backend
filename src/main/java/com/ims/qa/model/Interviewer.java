@@ -1,5 +1,6 @@
 package com.ims.qa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -39,6 +40,7 @@ public class Interviewer {
     @Column
     private String profilePhoto;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "interviewers", cascade = {CascadeType.ALL})
     private List<Interview> interviews;
 

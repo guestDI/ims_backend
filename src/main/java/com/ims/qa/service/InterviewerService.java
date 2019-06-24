@@ -1,5 +1,6 @@
 package com.ims.qa.service;
 
+import com.ims.qa.converter.InterviewerConverter;
 import com.ims.qa.dto.InterviewerDTO;
 import com.ims.qa.model.Interviewer;
 import com.ims.qa.repository.InterviewerRepository;
@@ -12,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class InterviewerService {
     @Autowired
     private InterviewerRepository interviewerRepository;
+
+    @Autowired
+    private InterviewerConverter interviewerConverter;
 
     public Interviewer addInterviewer(Interviewer interviewer){
         if(interviewerRepository.checkInterviewerExists(interviewer.getEmail()) > 0){
@@ -35,5 +39,9 @@ public class InterviewerService {
 
     public Iterable<Interviewer> getTopInterviewers(){
         return interviewerRepository.findTop5ByActiveTrueOrderByNumberOfInterviewsDesc();
+    }
+
+    public InterviewerDTO getInterviewerProfile(Long id){
+        return interviewerConverter.convertInterviewerInfo(interviewerRepository.getOne(id));
     }
 }

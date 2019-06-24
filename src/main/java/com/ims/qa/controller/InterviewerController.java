@@ -5,7 +5,9 @@ import com.ims.qa.model.Interviewer;
 import com.ims.qa.repository.InterviewerRepository;
 import com.ims.qa.service.InterviewerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -47,5 +49,11 @@ public class InterviewerController {
     @RequestMapping(value = "/getTopInterviewers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Interviewer> findTopInterviewers() {
         return interviewerService.getTopInterviewers();
+    }
+
+    @RequestMapping(value = "/getInterviewerInfo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<InterviewerDTO> getUserInfo(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(interviewerService.getInterviewerProfile(id), HttpStatus.OK);
+
     }
 }
