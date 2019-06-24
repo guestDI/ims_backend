@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Interviewer")
+@Table(name = "interviewer")
 @Builder
 public class Interviewer {
     @Id
@@ -39,9 +39,8 @@ public class Interviewer {
     @Column
     private String profilePhoto;
 
-//    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-//    private List<Item> items;
+    @ManyToMany(mappedBy = "interviewers", cascade = {CascadeType.ALL})
+    private List<Interview> interviews;
 
     @PrePersist
     public void prePersist() {

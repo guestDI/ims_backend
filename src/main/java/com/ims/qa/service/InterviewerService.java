@@ -1,5 +1,6 @@
 package com.ims.qa.service;
 
+import com.ims.qa.dto.InterviewerDTO;
 import com.ims.qa.model.Interviewer;
 import com.ims.qa.repository.InterviewerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,17 @@ public class InterviewerService {
         return interviewerRepository.save(interviewer);
     }
 
+    public void updateInterviewerProfile(InterviewerDTO interviewerDTO){
+        interviewerRepository.update(interviewerDTO);
+    }
+
     public Integer updateInterviewerStatus(Long id, boolean status){
         return interviewerRepository.updateInterviewerStatus(id, status);
     }
 
 
     public Iterable<Interviewer> getAll(){
-        return interviewerRepository.findAll();
+        return interviewerRepository.findAllByActiveTrue();
     }
 
     public Iterable<Interviewer> getTopInterviewers(){
