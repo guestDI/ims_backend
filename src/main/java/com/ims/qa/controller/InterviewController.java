@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "api/v1/interview")
+@RequestMapping(value = "api/v1/interviews")
 public class InterviewController {
     @Autowired
     InterviewService interviewService;
