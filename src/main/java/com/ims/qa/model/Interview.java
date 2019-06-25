@@ -36,7 +36,8 @@ public class Interview {
             inverseJoinColumns = { @JoinColumn(name = "interviewer_id") }
     )
     private List<Interviewer> interviewers;
-
+    @Column(nullable = false)
+    private boolean active;
     @Column
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -45,5 +46,10 @@ public class Interview {
         this.candidate = candidate;
         this.interviewers = interviewers;
         this.status = status;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        this.active = true;
     }
 }

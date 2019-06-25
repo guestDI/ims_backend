@@ -36,7 +36,7 @@ public class Interviewer {
     @Column(nullable = false)
     private boolean active;
     @Column(nullable = false)
-    private Date lastInterviewDate = new Date();
+    private Date date = new Date();
     @Column
     private String profilePhoto;
 
@@ -46,7 +46,7 @@ public class Interviewer {
 
     @PrePersist
     public void prePersist() {
-        this.lastInterviewDate = new Date();
+        this.date = new Date();
         this.active = true;
     }
 

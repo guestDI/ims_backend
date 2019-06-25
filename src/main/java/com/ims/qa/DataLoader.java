@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.ims.qa.enums.Status.DONE;
+import static com.ims.qa.enums.Status.REJECTED;
 
 @Component
 @Transactional(propagation = Propagation.REQUIRED)
@@ -73,13 +74,23 @@ public class DataLoader implements ApplicationRunner {
                 .location("Minsk")
                 .build();
 
+        Candidate ar = Candidate.builder()
+                .firstname("Alexandra")
+                .lastname("Ragulina")
+                .level(Level.SENIOR)
+                .location("Minsk")
+                .build();
+
         candidateRepository.save(ag);
         candidateRepository.save(ay);
+        candidateRepository.save(ar);
 
         Interview first = new Interview(ag, new ArrayList<>(Arrays.asList(v_khudzinskaya, v_dudarevich)), DONE);
         Interview second = new Interview(ay, new ArrayList<>(Arrays.asList(v_khudzinskaya)), DONE);
+        Interview third = new Interview(ar, new ArrayList<>(Arrays.asList(d_ihnatovich)), REJECTED);
 
         interviewRepository.save(first);
         interviewRepository.save(second);
+        interviewRepository.save(third);
     }
 }
