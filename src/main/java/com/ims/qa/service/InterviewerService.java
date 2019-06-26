@@ -38,7 +38,7 @@ public class InterviewerService {
     }
 
     public Iterable<Interviewer> getTopInterviewers(){
-        return interviewerRepository.findTop5ByActiveTrueOrderByNumberOfInterviewsDesc();
+        return interviewerRepository.findTop5ByActiveTrue();
     }
 
     public InterviewerDTO getInterviewerProfile(Long id){

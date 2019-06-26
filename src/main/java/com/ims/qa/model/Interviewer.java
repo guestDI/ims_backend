@@ -2,6 +2,7 @@ package com.ims.qa.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ims.qa.enums.Level;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,16 +28,14 @@ public class Interviewer {
     private String firstname;
     @Column(length = 21, nullable = false)
     private String lastname;
+    @Enumerated(EnumType.STRING)
+    private Level level;
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String location;
     @Column(nullable = false)
-    private Integer numberOfInterviews;
-    @Column(nullable = false)
     private boolean active;
-    @Column(nullable = false)
-    private Date date = new Date();
     @Column
     private String profilePhoto;
 
@@ -46,15 +45,23 @@ public class Interviewer {
 
     @PrePersist
     public void prePersist() {
-        this.date = new Date();
         this.active = true;
     }
 
-    public Interviewer(String firstname, String lastname, String email, String location, Integer numberOfInterviews){
+    public Interviewer(String firstname, String lastname, String email, String location, Level level){
         this.firstname = firstname;
         this.lastname = lastname;
+        this.level = level;
         this.email = email;
         this.location = location;
-        this.numberOfInterviews = numberOfInterviews;
+    }
+
+    public Interviewer(String firstname, String lastname, String email, String location, Level level, String photoUrl){
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.level = level;
+        this.email = email;
+        this.location = location;
+        this.profilePhoto = photoUrl;
     }
 }

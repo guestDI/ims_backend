@@ -20,7 +20,7 @@ public interface InterviewerRepository extends JpaRepository<Interviewer, Long> 
 
     List<Interviewer> findAllByActiveTrue();
 
-    List<Interviewer> findTop5ByActiveTrueOrderByNumberOfInterviewsDesc();
+    List<Interviewer> findTop5ByActiveTrue();
 
     @Modifying(clearAutomatically = true)
     @Query("Update Interviewer i SET i.active = :status WHERE i.id = :id")
