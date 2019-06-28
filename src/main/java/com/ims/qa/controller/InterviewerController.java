@@ -36,9 +36,9 @@ public class InterviewerController {
         return interviewerService.updateInterviewerStatus(id, status);
     }
 
-    @RequestMapping(value = "/getAllInterviewers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<Interviewer> findAll() {
-        return interviewerService.getAll();
+    @RequestMapping(value = "/getAllInterviewers/{page}/{size}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<Interviewer> findAll(@PathVariable("page") int page, @PathVariable("size") int size) {
+        return interviewerService.getAll(page, size);
     }
 
     @RequestMapping(value = "/getCountOfActiveInterviewers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

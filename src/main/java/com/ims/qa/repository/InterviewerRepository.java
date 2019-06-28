@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Repository
@@ -18,7 +19,7 @@ public interface InterviewerRepository extends JpaRepository<Interviewer, Long> 
 
     int countAllByActiveTrue();
 
-    List<Interviewer> findAllByActiveTrue();
+    List<Interviewer> findAllByActiveTrue(Pageable pageable);
 
     List<Interviewer> findTop5ByActiveTrue();
 

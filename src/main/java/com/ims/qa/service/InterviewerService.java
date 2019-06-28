@@ -5,6 +5,9 @@ import com.ims.qa.dto.InterviewerDTO;
 import com.ims.qa.model.Interviewer;
 import com.ims.qa.repository.InterviewerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,8 +36,9 @@ public class InterviewerService {
     }
 
 
-    public Iterable<Interviewer> getAll(){
-        return interviewerRepository.findAllByActiveTrue();
+    public Iterable<Interviewer> getAll(int page, int size){
+        Pageable pageWithSize = PageRequest.of(page, size, Sort.by("firstname").ascending().and(Sort.by("lastname").ascending()));
+        return interviewerRepository.findAllByActiveTrue(pageWithSize);
     }
 
     public Iterable<Interviewer> getTopInterviewers(){

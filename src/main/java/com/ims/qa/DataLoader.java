@@ -46,10 +46,10 @@ public class DataLoader implements ApplicationRunner {
         Interviewer v_khudzinskaya = new Interviewer("Volha", "Khudzinskaya", "v.khudzinskaya@godeltech.com",
                 "Minsk", Level.LEAD, "https://res.cloudinary.com/dxp2voatn/image/upload/v1561473148/ims/interviewers/v_khudzinskaya.png");
         Interviewer y_moroz = new Interviewer("Yury", "Moroz", "y.moroz@godeltech.com",
-                "Minsk", Level.SENIOR, "https://res.cloudinary.com/dxp2voatn/image/upload/v1561473148/ims/interviewers/y_maroz.png");
+                "Brest", Level.SENIOR, "https://res.cloudinary.com/dxp2voatn/image/upload/v1561473148/ims/interviewers/y_maroz.png");
         Interviewer t_lisovskaya = new Interviewer("Tatsiana", "Lisovskaya", "t.lisovskaya@godeltech.com",
                 "Minsk", Level.SENIOR, "https://res.cloudinary.com/dxp2voatn/image/upload/v1561473148/ims/interviewers/t_lisouskaya.png");
-        Interviewer e_solonina = new Interviewer("Elena", "Solonina", "t.solonina@godeltech.com",
+        Interviewer e_solonina = new Interviewer("Elena", "Solonina", "e.solonina@godeltech.com",
                 "Minsk", Level.SENIOR, "https://res.cloudinary.com/dxp2voatn/image/upload/v1561473148/ims/interviewers/e_solonina.png");
         Interviewer s_kamisarava = new Interviewer("Sviatlana", "Kamisarava", "s.kamisarava@godeltech.com",
                 "Grodno", Level.SENIOR, "https://res.cloudinary.com/dxp2voatn/image/upload/v1561555967/ims/interviewers/s_kamisarava.png");
@@ -58,7 +58,7 @@ public class DataLoader implements ApplicationRunner {
         Interviewer n_kurilenko = new Interviewer("Natalia", "Kurilenko", "n.kurilenko@godeltech.com",
                 "Gomel", Level.LEAD, "https://res.cloudinary.com/dxp2voatn/image/upload/v1561473148/ims/interviewers/n_kurilenko.png");
         Interviewer s_milaserdov = new Interviewer("Semen", "Milaserdov", "s.milaserdov@godeltech.com",
-                "Minsk", Level.SENIOR, "https://res.cloudinary.com/dxp2voatn/image/upload/v1561473148/ims/interviewers/s_milaserdov.png");
+                "Brest", Level.SENIOR, "https://res.cloudinary.com/dxp2voatn/image/upload/v1561473148/ims/interviewers/s_milaserdov.png");
         Interviewer a_putrych = new Interviewer("Aliaksei", "Putrych", "a.putrych@godeltech.com",
                 "Grodno", Level.SENIOR, "https://res.cloudinary.com/dxp2voatn/image/upload/v1561473148/ims/interviewers/v_putrych.png");
         Interviewer v_rodin = new Interviewer("Vitaliy", "Rodin", "v.rodin@godeltech.com",
