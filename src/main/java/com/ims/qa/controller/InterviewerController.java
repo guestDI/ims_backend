@@ -26,9 +26,8 @@ public class InterviewerController {
     }
 
     @RequestMapping(value = "/updateInterviewerProfile", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public InterviewerDTO updateUser(@RequestBody InterviewerDTO interviewerDTO) {
-        interviewerService.updateInterviewerProfile(interviewerDTO);
-        return interviewerDTO;
+    public Interviewer updateUser(@RequestBody InterviewerDTO interviewerDTO) {
+        return interviewerService.updateInterviewerProfile(interviewerDTO);
     }
 
     @RequestMapping(value = "/updateInterviewerStatus/{id}/{status}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)

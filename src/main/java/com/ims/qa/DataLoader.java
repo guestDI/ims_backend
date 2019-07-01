@@ -17,10 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static com.ims.qa.enums.Status.DONE;
-import static com.ims.qa.enums.Status.REJECTED;
+import static com.ims.qa.enums.Status.*;
 
 @Component
 @Transactional(propagation = Propagation.REQUIRED)
@@ -102,16 +102,26 @@ public class DataLoader implements ApplicationRunner {
                 .location("Minsk")
                 .build();
 
+        Candidate ik = Candidate.builder()
+                .firstname("Ivan")
+                .lastname("Katsenya")
+                .level(Level.MIDDLE)
+                .location("Brest")
+                .build();
+
         candidateRepository.save(ag);
         candidateRepository.save(ay);
         candidateRepository.save(ar);
+        candidateRepository.save(ik);
 
         Interview first = new Interview(ag, new ArrayList<>(Arrays.asList(v_khudzinskaya, v_dudarevich)), DONE);
-        Interview second = new Interview(ay, new ArrayList<>(Arrays.asList(v_khudzinskaya)), DONE);
-        Interview third = new Interview(ar, new ArrayList<>(Arrays.asList(d_ihnatovich)), REJECTED);
+        Interview second = new Interview(ay, new ArrayList<>(Collections.singletonList(v_mukasei)), DONE);
+        Interview third = new Interview(ar, new ArrayList<>(Collections.singletonList(d_ihnatovich)), REJECTED);
+        Interview fourth = new Interview(ik, new ArrayList<>(Arrays.asList(h_kurak, y_moroz)), JO_REJECTED);
 
         interviewRepository.save(first);
         interviewRepository.save(second);
         interviewRepository.save(third);
+        interviewRepository.save(fourth);
     }
 }

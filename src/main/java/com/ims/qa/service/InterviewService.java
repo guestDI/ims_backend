@@ -1,5 +1,6 @@
 package com.ims.qa.service;
 
+import com.ims.qa.enums.Status;
 import com.ims.qa.model.Interview;
 import com.ims.qa.repository.InterviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,13 @@ public class InterviewService {
 
     public Integer setInterviewerAsInactive(Long id){
         return interviewRepository.updateInterviewToInactive(id);
+    }
+
+    public Integer getNumberOfAllInterviews(){
+        return interviewRepository.countAllByActiveTrue();
+    }
+
+    public Integer getNumberOfInterviewsByStatus(Status status){
+        return interviewRepository.countAllByStatusEquals(status);
     }
 }

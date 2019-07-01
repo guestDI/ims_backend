@@ -2,6 +2,7 @@ package com.ims.qa.service;
 
 import com.ims.qa.converter.InterviewerConverter;
 import com.ims.qa.dto.InterviewerDTO;
+import com.ims.qa.model.Interview;
 import com.ims.qa.model.Interviewer;
 import com.ims.qa.repository.InterviewerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.validation.constraints.Null;
 
 @Service
 @Transactional
@@ -27,8 +30,17 @@ public class InterviewerService {
         return interviewerRepository.save(interviewer);
     }
 
-    public void updateInterviewerProfile(InterviewerDTO interviewerDTO){
-        interviewerRepository.update(interviewerDTO);
+    public Interviewer updateInterviewerProfile(InterviewerDTO interviewerDTO){
+        Interviewer interviewer = interviewerRepository.findById(interviewerDTO.getId())
+                .orElseThrow(NullPointerException::new);
+
+        interviewer.setFirstname(interviewerDTO.getFirstname());
+        interviewer.setLastname(interviewerDTO.getLastname());
+        interviewer.setEmail(interviewerDTO.getEmail());
+
+        Interviewer updated = interviewerRepository.save(interviewer);
+
+        return updated;
     }
 
     public Integer updateInterviewerStatus(Long id, boolean status){
