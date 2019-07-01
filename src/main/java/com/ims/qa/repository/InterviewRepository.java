@@ -20,5 +20,6 @@ public interface InterviewRepository extends JpaRepository<Interview, Long> {
 
     int countAllByActiveTrue();
 
-    int countAllByStatusEquals(@Param("status")Status status);
+    int countAllByActiveTrueAndStatusEquals(@Param("status")Status status);
+
 }

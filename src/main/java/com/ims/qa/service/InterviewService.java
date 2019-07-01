@@ -26,6 +26,6 @@ public class InterviewService {
     }
 
     public Integer getNumberOfInterviewsByStatus(Status status){
-        return interviewRepository.countAllByStatusEquals(status);
+        return interviewRepository.countAllByActiveTrueAndStatusEquals(status);
     }
 }
