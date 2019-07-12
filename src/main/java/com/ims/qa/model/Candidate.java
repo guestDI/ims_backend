@@ -1,6 +1,7 @@
 package com.ims.qa.model;
 
 import com.ims.qa.enums.Level;
+import com.ims.qa.enums.Location;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,7 +26,8 @@ public class Candidate {
     @Enumerated(EnumType.STRING)
     private Level level;
     @Column(nullable = false)
-    private String location;
+    @Enumerated(EnumType.STRING)
+    private Location location;
     @Column(columnDefinition = "text")
     private String comment;
     private Date startDate = new Date();
@@ -37,7 +39,7 @@ public class Candidate {
         this.active = true;
     }
 
-    public Candidate(String firstname, String lastname, String location, Level level) {
+    public Candidate(String firstname, String lastname, Location location, Level level) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.location = location;
