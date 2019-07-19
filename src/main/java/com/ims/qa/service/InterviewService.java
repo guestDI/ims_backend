@@ -6,6 +6,9 @@ import com.ims.qa.repository.InterviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 @Service
 @Transactional
@@ -13,8 +16,9 @@ public class InterviewService {
     @Autowired
     private InterviewRepository interviewRepository;
 
-    public Iterable<Interview> getAll(){
-        return interviewRepository.findAllByActiveTrue();
+    public Iterable<Interview> getAll(int page, int size){
+        Pageable pageWithSize = PageRequest.of(page, size, Sort.by("date").descending());
+        return interviewRepository.findAllByActiveTrue(pageWithSize);
     }
 
     public Integer setInterviewerAsInactive(Long id){

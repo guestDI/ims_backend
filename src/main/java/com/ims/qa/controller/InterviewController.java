@@ -14,9 +14,9 @@ public class InterviewController {
     @Autowired
     InterviewService interviewService;
 
-    @RequestMapping(value = "/getAllInterviews", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<Interview> findAll() {
-        return interviewService.getAll();
+    @RequestMapping(value = "/getAllInterviews/{page}/{size}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<Interview> findAll(@PathVariable("page") int page, @PathVariable("size") int size) {
+        return interviewService.getAll(page, size);
     }
 
     @RequestMapping(value = "/updateInterviewToInactive/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
