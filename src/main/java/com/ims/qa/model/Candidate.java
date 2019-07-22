@@ -2,6 +2,7 @@ package com.ims.qa.model;
 
 import com.ims.qa.enums.Level;
 import com.ims.qa.enums.Location;
+import com.ims.qa.enums.Status;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,6 +34,9 @@ public class Candidate {
     private Date startDate = new Date();
     @Column(nullable = false)
     private boolean active;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @PrePersist
     public void prePersist() {
@@ -44,6 +48,14 @@ public class Candidate {
         this.lastname = lastname;
         this.location = location;
         this.level = level;
+    }
+
+    public Candidate(String firstname, String lastname, Location location, Level level, Status status) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.location = location;
+        this.level = level;
+        this.status = status;
     }
 
 }

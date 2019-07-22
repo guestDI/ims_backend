@@ -10,7 +10,8 @@ create table candidate
 	lastname varchar(21) not null,
 	level varchar(255),
 	location varchar(255) not null,
-	start_date timestamp
+	start_date timestamp,
+	status varchar(255)
 );
 
 alter table candidate owner to adminims;
