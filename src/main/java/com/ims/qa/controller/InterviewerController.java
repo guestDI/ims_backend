@@ -1,6 +1,7 @@
 package com.ims.qa.controller;
 
 import com.ims.qa.dto.InterviewerDTO;
+import com.ims.qa.dto.UpdateInterviewerDTO;
 import com.ims.qa.model.Interviewer;
 import com.ims.qa.repository.InterviewerRepository;
 import com.ims.qa.service.InterviewerService;
@@ -26,8 +27,8 @@ public class InterviewerController {
     }
 
     @RequestMapping(value = "/updateInterviewerProfile", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Interviewer updateUser(@RequestBody InterviewerDTO interviewerDTO) {
-        return interviewerService.updateInterviewerProfile(interviewerDTO);
+    public Interviewer updateUser(@RequestBody UpdateInterviewerDTO updateInterviewerDTO) {
+        return interviewerService.updateInterviewerProfile(updateInterviewerDTO);
     }
 
     @RequestMapping(value = "/updateInterviewerStatus/{id}/{status}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -38,6 +39,11 @@ public class InterviewerController {
     @RequestMapping(value = "/getAllInterviewers/{page}/{size}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Interviewer> findAll(@PathVariable("page") int page, @PathVariable("size") int size) {
         return interviewerService.getAll(page, size);
+    }
+
+    @RequestMapping(value = "/getAllInterviewersWithInterviewNumber", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<InterviewerDTO> findAllWithInterviewNumber(){
+        return interviewerService.getAll();
     }
 
     @RequestMapping(value = "/getCountOfActiveInterviewers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -51,7 +57,7 @@ public class InterviewerController {
     }
 
     @RequestMapping(value = "/getInterviewerInfo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<InterviewerDTO> getUserInfo(@PathVariable("id") Long id) {
+    public ResponseEntity<UpdateInterviewerDTO> getUserInfo(@PathVariable("id") Long id) {
         return new ResponseEntity<>(interviewerService.getInterviewerProfile(id), HttpStatus.OK);
 
     }

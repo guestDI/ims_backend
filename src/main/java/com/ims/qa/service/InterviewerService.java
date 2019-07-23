@@ -2,7 +2,7 @@ package com.ims.qa.service;
 
 import com.ims.qa.converter.InterviewerConverter;
 import com.ims.qa.dto.InterviewerDTO;
-import com.ims.qa.model.Interview;
+import com.ims.qa.dto.UpdateInterviewerDTO;
 import com.ims.qa.model.Interviewer;
 import com.ims.qa.repository.InterviewerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.validation.constraints.Null;
 
 @Service
 @Transactional
@@ -30,13 +28,13 @@ public class InterviewerService {
         return interviewerRepository.save(interviewer);
     }
 
-    public Interviewer updateInterviewerProfile(InterviewerDTO interviewerDTO){
-        Interviewer interviewer = interviewerRepository.findById(interviewerDTO.getId())
+    public Interviewer updateInterviewerProfile(UpdateInterviewerDTO updateInterviewerDTO){
+        Interviewer interviewer = interviewerRepository.findById(updateInterviewerDTO.getId())
                 .orElseThrow(NullPointerException::new);
 
-        interviewer.setFirstname(interviewerDTO.getFirstname());
-        interviewer.setLastname(interviewerDTO.getLastname());
-        interviewer.setEmail(interviewerDTO.getEmail());
+        interviewer.setFirstname(updateInterviewerDTO.getFirstname());
+        interviewer.setLastname(updateInterviewerDTO.getLastname());
+        interviewer.setEmail(updateInterviewerDTO.getEmail());
 
         Interviewer updated = interviewerRepository.save(interviewer);
 
@@ -53,11 +51,15 @@ public class InterviewerService {
         return interviewerRepository.findAllByActiveTrue(pageWithSize);
     }
 
+    public Iterable<InterviewerDTO> getAll(){
+        return interviewerRepository.findAllWithInterviews();
+    }
+
     public Iterable<Interviewer> getTopInterviewers(){
         return interviewerRepository.findTop5ByActiveTrue();
     }
 
-    public InterviewerDTO getInterviewerProfile(Long id){
+    public UpdateInterviewerDTO getInterviewerProfile(Long id){
         return interviewerConverter.convertInterviewerInfo(interviewerRepository.getOne(id));
     }
 }

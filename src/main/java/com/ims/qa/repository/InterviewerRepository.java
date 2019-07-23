@@ -1,7 +1,9 @@
 package com.ims.qa.repository;
 
 import com.ims.qa.dto.InterviewerDTO;
+import com.ims.qa.dto.UpdateInterviewerDTO;
 import com.ims.qa.model.Interviewer;
+import com.ims.qa.model.Interview;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,6 +11,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.domain.Pageable;
+
+import java.lang.annotation.Native;
 import java.util.List;
 
 @Repository
@@ -30,6 +34,11 @@ public interface InterviewerRepository extends JpaRepository<Interviewer, Long> 
     @Modifying
     @Query("UPDATE Interviewer i SET i.firstname = :#{#dto.firstname}, i.lastname = :#{#dto.lastname}, i.email = :#{#dto.email} " +
             "WHERE i.id = :#{#dto.id}")
-    int update(@Param("dto") InterviewerDTO dto);
+    int update(@Param("dto") UpdateInterviewerDTO dto);
+
+    @Query(
+            name = "InterviewerQuery",
+            nativeQuery = true)
+    List<InterviewerDTO> findAllWithInterviews();
 
 }
