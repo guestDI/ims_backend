@@ -2,6 +2,8 @@ package com.ims.qa.service;
 
 import com.ims.qa.converter.InterviewerConverter;
 import com.ims.qa.dto.InterviewerDTO;
+import com.ims.qa.dto.InterviewerStatisticDTO;
+import com.ims.qa.dto.TopInterviewerDTO;
 import com.ims.qa.dto.UpdateInterviewerDTO;
 import com.ims.qa.model.Interviewer;
 import com.ims.qa.repository.InterviewerRepository;
@@ -55,9 +57,17 @@ public class InterviewerService {
         return interviewerRepository.findAllWithInterviews();
     }
 
-    public Iterable<Interviewer> getTopInterviewers(){
-        return interviewerRepository.findTop5ByActiveTrue();
+    public Iterable<TopInterviewerDTO> getTopInterviewers(){
+        return interviewerRepository.findTopWithInterviewsNumber();
     }
+
+    public Iterable<InterviewerStatisticDTO> getStatisticByMonth(int id){
+        return interviewerRepository.getInterviewerStatistic(id);
+    }
+
+//    public Iterable<Interviewer> getTopInterviewers(){
+//        return interviewerRepository.findTop5ByActiveTrue();
+//    }
 
     public UpdateInterviewerDTO getInterviewerProfile(Long id){
         return interviewerConverter.convertInterviewerInfo(interviewerRepository.getOne(id));

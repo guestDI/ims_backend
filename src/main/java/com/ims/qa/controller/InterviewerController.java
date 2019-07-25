@@ -1,6 +1,8 @@
 package com.ims.qa.controller;
 
 import com.ims.qa.dto.InterviewerDTO;
+import com.ims.qa.dto.InterviewerStatisticDTO;
+import com.ims.qa.dto.TopInterviewerDTO;
 import com.ims.qa.dto.UpdateInterviewerDTO;
 import com.ims.qa.model.Interviewer;
 import com.ims.qa.repository.InterviewerRepository;
@@ -41,6 +43,11 @@ public class InterviewerController {
         return interviewerService.getAll(page, size);
     }
 
+    @RequestMapping(value = "/getInterviewerStatisticById/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<InterviewerStatisticDTO> findAll(@PathVariable("id") int id) {
+        return interviewerService.getStatisticByMonth(id);
+    }
+
     @RequestMapping(value = "/getAllInterviewersWithInterviewNumber", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<InterviewerDTO> findAllWithInterviewNumber(){
         return interviewerService.getAll();
@@ -52,7 +59,7 @@ public class InterviewerController {
     }
 
     @RequestMapping(value = "/getTopInterviewers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<Interviewer> findTopInterviewers() {
+    public Iterable<TopInterviewerDTO> findTopInterviewers() {
         return interviewerService.getTopInterviewers();
     }
 

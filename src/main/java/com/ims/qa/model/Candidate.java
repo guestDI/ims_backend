@@ -1,5 +1,7 @@
 package com.ims.qa.model;
 
+import com.ims.qa.dto.CandidateLevelDTO;
+import com.ims.qa.dto.TopInterviewerDTO;
 import com.ims.qa.enums.Level;
 import com.ims.qa.enums.Location;
 import com.ims.qa.enums.Status;
@@ -15,6 +17,17 @@ import java.util.Date;
 @Entity
 @Table(name = "candidate")
 @Builder
+@SqlResultSetMapping(name="LevelsCount", classes = {
+        @ConstructorResult(targetClass = CandidateLevelDTO.class,
+                columns = {
+                        @ColumnResult(name="level", type = String.class),
+                        @ColumnResult(name="count", type = Integer.class),
+                })
+})
+@NamedNativeQuery(
+        name = "LevelsCountQuery",
+        query = "select level, count(*) from candidate group by level order by level",
+        resultSetMapping = "LevelsCount")
 public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

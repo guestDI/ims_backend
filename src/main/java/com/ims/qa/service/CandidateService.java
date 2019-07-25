@@ -1,5 +1,6 @@
 package com.ims.qa.service;
 
+import com.ims.qa.dto.CandidateLevelDTO;
 import com.ims.qa.model.Candidate;
 import com.ims.qa.repository.CandidateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,9 @@ public class CandidateService {
     public Iterable<Candidate> getAll(int page, int size){
         Pageable pageWithSize = PageRequest.of(page, size, Sort.by("startDate").ascending().and(Sort.by("lastname").ascending()));
         return candidateRepository.findAllByActiveTrue(pageWithSize);
+    }
+
+    public Iterable<CandidateLevelDTO> getLevelsWithNumber(){
+        return candidateRepository.findLevelsWithNumber();
     }
 }

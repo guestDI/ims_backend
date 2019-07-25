@@ -1,5 +1,6 @@
 package com.ims.qa.controller;
 
+import com.ims.qa.dto.CandidateLevelDTO;
 import com.ims.qa.model.Candidate;
 import com.ims.qa.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,10 @@ public class CandidateController {
     @RequestMapping(value = "/getAllCandidates/{page}/{size}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Candidate> findAll(@PathVariable("page") int page, @PathVariable("size") int size) {
         return candidateService.getAll(page, size);
+    }
+
+    @RequestMapping(value = "/getNumberOfLevels", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<CandidateLevelDTO> countLevels(){
+        return candidateService.getLevelsWithNumber();
     }
 }

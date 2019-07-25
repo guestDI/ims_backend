@@ -1,6 +1,8 @@
 package com.ims.qa.repository;
 
 import com.ims.qa.dto.InterviewerDTO;
+import com.ims.qa.dto.InterviewerStatisticDTO;
+import com.ims.qa.dto.TopInterviewerDTO;
 import com.ims.qa.dto.UpdateInterviewerDTO;
 import com.ims.qa.model.Interviewer;
 import com.ims.qa.model.Interview;
@@ -26,6 +28,15 @@ public interface InterviewerRepository extends JpaRepository<Interviewer, Long> 
     List<Interviewer> findAllByActiveTrue(Pageable pageable);
 
     List<Interviewer> findTop5ByActiveTrue();
+    @Query(
+            name = "TopInterviewerQuery",
+            nativeQuery = true)
+    List<TopInterviewerDTO> findTopWithInterviewsNumber();
+
+    @Query(
+            name = "getInterviewerStatistic",
+            nativeQuery = true)
+    List<InterviewerStatisticDTO> getInterviewerStatistic(int id);
 
     @Modifying(clearAutomatically = true)
     @Query("Update Interviewer i SET i.active = :status WHERE i.id = :id")
