@@ -1,11 +1,5 @@
 package com.ims.qa;
 
-import com.ims.qa.enums.Level;
-import com.ims.qa.enums.Location;
-import com.ims.qa.enums.Status;
-import com.ims.qa.model.Candidate;
-import com.ims.qa.model.Interview;
-import com.ims.qa.model.Interviewer;
 import com.ims.qa.repository.CandidateRepository;
 import com.ims.qa.repository.InterviewRepository;
 import com.ims.qa.repository.InterviewerRepository;
@@ -15,13 +9,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static com.ims.qa.enums.Status.*;
 
 @Component
 @Transactional(propagation = Propagation.REQUIRED)

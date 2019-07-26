@@ -1,10 +1,9 @@
 package com.ims.qa.model;
 
 import com.ims.qa.dto.CandidateLevelDTO;
-import com.ims.qa.dto.TopInterviewerDTO;
 import com.ims.qa.enums.Level;
 import com.ims.qa.enums.Location;
-import com.ims.qa.enums.Status;
+import com.ims.qa.enums.CandidateStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -49,7 +48,7 @@ public class Candidate {
     private boolean active;
     @Column
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private CandidateStatus candidateStatus;
 
     @PrePersist
     public void prePersist() {
@@ -63,12 +62,12 @@ public class Candidate {
         this.level = level;
     }
 
-    public Candidate(String firstname, String lastname, Location location, Level level, Status status) {
+    public Candidate(String firstname, String lastname, Location location, Level level, CandidateStatus candidateStatus) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.location = location;
         this.level = level;
-        this.status = status;
+        this.candidateStatus = candidateStatus;
     }
 
 }

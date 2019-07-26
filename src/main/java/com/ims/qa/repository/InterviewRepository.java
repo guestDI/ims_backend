@@ -1,6 +1,7 @@
 package com.ims.qa.repository;
 
-import com.ims.qa.enums.Status;
+import com.ims.qa.enums.CandidateStatus;
+import com.ims.qa.enums.InterviewStatus;
 import com.ims.qa.model.Interview;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -21,6 +22,6 @@ public interface InterviewRepository extends JpaRepository<Interview, Long> {
 
     int countAllByActiveTrue();
 
-    int countAllByActiveTrueAndStatusEquals(@Param("status")Status status);
+//    int countAllByActiveTrueAndStatusEquals(@Param("interviewStatus") InterviewStatus interviewStatus);
 
 }

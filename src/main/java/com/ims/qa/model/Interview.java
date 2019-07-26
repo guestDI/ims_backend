@@ -1,8 +1,6 @@
 package com.ims.qa.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ims.qa.enums.Level;
-import com.ims.qa.enums.Status;
+import com.ims.qa.enums.InterviewStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -40,12 +38,12 @@ public class Interview {
     private boolean active;
     @Column
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private InterviewStatus interviewStatus;
 
-    public Interview(Candidate candidate, ArrayList<Interviewer> interviewers, Status status) {
+    public Interview(Candidate candidate, ArrayList<Interviewer> interviewers, InterviewStatus interviewStatus) {
         this.candidate = candidate;
         this.interviewers = interviewers;
-        this.status = status;
+        this.interviewStatus = interviewStatus;
     }
 
     @PrePersist

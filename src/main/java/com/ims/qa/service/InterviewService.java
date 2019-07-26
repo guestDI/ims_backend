@@ -1,6 +1,7 @@
 package com.ims.qa.service;
 
-import com.ims.qa.enums.Status;
+import com.ims.qa.enums.CandidateStatus;
+import com.ims.qa.enums.InterviewStatus;
 import com.ims.qa.model.Interview;
 import com.ims.qa.repository.InterviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class InterviewService {
         return interviewRepository.countAllByActiveTrue();
     }
 
-    public Integer getNumberOfInterviewsByStatus(Status status){
-        return interviewRepository.countAllByActiveTrueAndStatusEquals(status);
-    }
+//    public Integer getNumberOfInterviewsByStatus(InterviewStatus interviewStatus){
+//        return interviewRepository.countAllByActiveTrueAndStatusEquals(interviewStatus);
+//    }
 }

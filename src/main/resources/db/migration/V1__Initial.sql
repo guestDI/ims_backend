@@ -11,7 +11,7 @@ create table candidate
 	level varchar(255),
 	location varchar(255) not null,
 	start_date timestamp,
-	status varchar(255)
+	candidate_status varchar(255)
 );
 
 alter table candidate owner to adminims;
@@ -41,7 +41,7 @@ create table interviews
 			primary key,
 	active boolean not null,
 	date timestamp,
-	status varchar(255),
+	interview_status varchar(255),
 	candidate_id bigint
 		constraint fk1lq0o8hgstsv6g2c2t4b7koos
 			references candidate

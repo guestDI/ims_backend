@@ -1,16 +1,16 @@
 package com.ims.qa.enums;
 
-public enum Status {
-    TODO("To Do"),
-    DONE("Done"),
+public enum CandidateStatus {
+    IN_REVIEW("In Review"),
     REJECTED("Rejected"),
     JO_MADE("JO Made"),
     JO_REJECTED("JO Rejected"),
-    JO_ACCEPTED("JO Accepted");
+    JO_ACCEPTED("JO Accepted"),
+    STARTED("Started");
 
     private String name;
 
-    Status(String name) {
+    CandidateStatus(String name) {
         this.name = name;
     }
 

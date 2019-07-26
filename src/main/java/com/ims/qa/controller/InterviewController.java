@@ -1,6 +1,7 @@
 package com.ims.qa.controller;
 
-import com.ims.qa.enums.Status;
+import com.ims.qa.enums.CandidateStatus;
+import com.ims.qa.enums.InterviewStatus;
 import com.ims.qa.model.Interview;
 import com.ims.qa.service.InterviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class InterviewController {
         return interviewService.getNumberOfAllInterviews();
     }
 
-    @RequestMapping(value = "/getNumberOfAllInterviewsByStatus/{status}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Integer getNumberOfInterviewsByStatus(@PathVariable("status") Status status){
-        return interviewService.getNumberOfInterviewsByStatus(status);
-    }
+//    @RequestMapping(value = "/getNumberOfAllInterviewsByStatus/{interviewStatus}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public Integer getNumberOfInterviewsByStatus(@PathVariable("interviewStatus") InterviewStatus interviewStatus){
+//        return interviewService.getNumberOfInterviewsByStatus(interviewStatus);
+//    }
 }
