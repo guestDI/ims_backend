@@ -1,6 +1,7 @@
 package com.ims.qa.model;
 
 import com.ims.qa.dto.CandidateLevelDTO;
+import com.ims.qa.dto.CandidateLocationDTO;
 import com.ims.qa.enums.Level;
 import com.ims.qa.enums.Location;
 import com.ims.qa.enums.CandidateStatus;
@@ -23,10 +24,39 @@ import java.util.Date;
                         @ColumnResult(name="count", type = Integer.class),
                 })
 })
+@SqlResultSetMapping(name="LocationsCount", classes = {
+        @ConstructorResult(targetClass = CandidateLocationDTO.class,
+                columns = {
+                        @ColumnResult(name="location", type = String.class),
+                        @ColumnResult(name="count", type = Integer.class),
+                })
+})
 @NamedNativeQuery(
         name = "LevelsCountQuery",
         query = "select level, count(*) from candidate group by level order by level",
         resultSetMapping = "LevelsCount")
+@NamedNativeQuery(
+        name = "LocationsCurrentYearCountQuery",
+        query = "Select location, count(*) from candidate join interviews i on candidate.id = i.candidate_id\n" +
+                "where date_part('year', i.date) = date_part('year', CURRENT_DATE) group by location;",
+        resultSetMapping = "LocationsCount")
+@NamedNativeQuery(
+        name = "LocationsPrevYearCountQuery",
+        query = "Select location, count(*) from candidate join interviews i on candidate.id = i.candidate_id\n" +
+                "WHERE i.date >= date_trunc('year', current_date - interval '1' month)\n" +
+                "  and i.date < date_trunc('year', current_date) group by location;",
+        resultSetMapping = "LocationsCount")
+@NamedNativeQuery(
+        name = "LocationsCurrentMonthCountQuery",
+        query = "Select location, count(*) from candidate join interviews i on candidate.id = i.candidate_id\n" +
+                "where date_part('month', i.date) = date_part('month', CURRENT_DATE) group by location;",
+        resultSetMapping = "LocationsCount")
+@NamedNativeQuery(
+        name = "LocationsPrevMonthCountQuery",
+        query = "Select location, count(*) from candidate join interviews i on candidate.id = i.candidate_id\n" +
+                "WHERE i.date >= date_trunc('month', current_date - interval '1' month)\n" +
+                "and i.date < date_trunc('month', current_date) group by location;",
+        resultSetMapping = "LocationsCount")
 public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

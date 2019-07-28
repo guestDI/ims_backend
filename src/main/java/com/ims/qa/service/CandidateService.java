@@ -1,6 +1,7 @@
 package com.ims.qa.service;
 
 import com.ims.qa.dto.CandidateLevelDTO;
+import com.ims.qa.dto.CandidateLocationDTO;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.model.Candidate;
 import com.ims.qa.repository.CandidateRepository;
@@ -33,5 +34,20 @@ public class CandidateService {
 
     public Integer getNumberOfCandidatesByStatus(CandidateStatus candidateStatus){
         return candidateRepository.countAllByActiveTrueAndCandidateStatusEquals(candidateStatus);
+    }
+
+    public Iterable<CandidateLocationDTO> getLocationWithNumberForDate(String date){
+        switch (date) {
+            case "currentMonth":
+                return candidateRepository.findLocationsWithNumberCurrentMonth();
+            case "prevMonth":
+                return candidateRepository.findLocationsWithNumberPrevMonth();
+            case "currentYear":
+                return candidateRepository.findLocationsWithNumberCurrentYear();
+            case "prevYear":
+                return candidateRepository.findLocationsWithNumberPrevYear();
+        }
+
+        return null;
     }
 }

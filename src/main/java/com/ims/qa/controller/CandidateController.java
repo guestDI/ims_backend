@@ -1,6 +1,7 @@
 package com.ims.qa.controller;
 
 import com.ims.qa.dto.CandidateLevelDTO;
+import com.ims.qa.dto.CandidateLocationDTO;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.model.Candidate;
 import com.ims.qa.service.CandidateService;
@@ -34,5 +35,11 @@ public class CandidateController {
     @RequestMapping(value = "/getNumberOfAllCandidatesByStatus/{candidateStatus}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Integer getNumberOfInterviewsByStatus(@PathVariable("candidateStatus") CandidateStatus candidateStatus){
         return candidateService.getNumberOfCandidatesByStatus(candidateStatus);
+    }
+
+    @RequestMapping(value = "/getNumberOfLocations/{date}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<CandidateLocationDTO> countLocations(@PathVariable("date") String date)
+    {
+        return candidateService.getLocationWithNumberForDate(date);
     }
 }

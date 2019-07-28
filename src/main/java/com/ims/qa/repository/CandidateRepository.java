@@ -1,6 +1,7 @@
 package com.ims.qa.repository;
 
 import com.ims.qa.dto.CandidateLevelDTO;
+import com.ims.qa.dto.CandidateLocationDTO;
 import com.ims.qa.dto.TopInterviewerDTO;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.model.Candidate;
@@ -24,6 +25,26 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
             name = "LevelsCountQuery",
             nativeQuery = true)
     List<CandidateLevelDTO> findLevelsWithNumber();
+
+    @Query(
+            name = "LocationsCurrentYearCountQuery",
+            nativeQuery = true)
+    List<CandidateLocationDTO> findLocationsWithNumberCurrentYear();
+
+    @Query(
+            name = "LocationsPrevYearCountQuery",
+            nativeQuery = true)
+    List<CandidateLocationDTO> findLocationsWithNumberPrevYear();
+
+    @Query(
+            name = "LocationsCurrentMonthCountQuery",
+            nativeQuery = true)
+    List<CandidateLocationDTO> findLocationsWithNumberCurrentMonth();
+
+    @Query(
+            name = "LocationsPrevMonthCountQuery",
+            nativeQuery = true)
+    List<CandidateLocationDTO> findLocationsWithNumberPrevMonth();
 
     int countAllByActiveTrueAndCandidateStatusEquals(@Param("candidateStatus") CandidateStatus candidateStatus);
 }
