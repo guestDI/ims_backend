@@ -22,9 +22,24 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
     int countAllByActiveTrue();
 
     @Query(
-            name = "LevelsCountQuery",
+            name = "LevelsCurrentYearCountQuery",
             nativeQuery = true)
-    List<CandidateLevelDTO> findLevelsWithNumber();
+    List<CandidateLevelDTO> findLevelsWithNumberCurrentYear();
+
+    @Query(
+            name = "LevelsPrevYearCountQuery",
+            nativeQuery = true)
+    List<CandidateLevelDTO> findLevelsWithNumberPrevYear();
+
+    @Query(
+            name = "LevelsCurrentMonthCountQuery",
+            nativeQuery = true)
+    List<CandidateLevelDTO> findLevelsWithNumberCurrentMonth();
+
+    @Query(
+            name = "LevelsPrevMonthCountQuery",
+            nativeQuery = true)
+    List<CandidateLevelDTO> findLevelsWithNumberPrevMonth();
 
     @Query(
             name = "LocationsCurrentYearCountQuery",

@@ -28,8 +28,19 @@ public class CandidateService {
         return candidateRepository.countAllByActiveTrue();
     }
 
-    public Iterable<CandidateLevelDTO> getLevelsWithNumber(){
-        return candidateRepository.findLevelsWithNumber();
+    public Iterable<CandidateLevelDTO> getLevelsWithNumberForDate(String date){
+        switch (date) {
+            case "currentMonth":
+                return candidateRepository.findLevelsWithNumberCurrentMonth();
+            case "prevMonth":
+                return candidateRepository.findLevelsWithNumberPrevMonth();
+            case "currentYear":
+                return candidateRepository.findLevelsWithNumberCurrentYear();
+            case "prevYear":
+                return candidateRepository.findLevelsWithNumberPrevYear();
+        }
+
+        return null;
     }
 
     public Integer getNumberOfCandidatesByStatus(CandidateStatus candidateStatus){

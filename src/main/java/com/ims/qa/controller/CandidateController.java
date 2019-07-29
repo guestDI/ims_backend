@@ -27,9 +27,9 @@ public class CandidateController {
         return candidateService.getNumberOfAllCandidates();
     }
 
-    @RequestMapping(value = "/getNumberOfLevels", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<CandidateLevelDTO> countLevels(){
-        return candidateService.getLevelsWithNumber();
+    @RequestMapping(value = "/getNumberOfLevels/{date}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<CandidateLevelDTO> countLevels(@PathVariable("date") String date){
+        return candidateService.getLevelsWithNumberForDate(date);
     }
 
     @RequestMapping(value = "/getNumberOfAllCandidatesByStatus/{candidateStatus}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

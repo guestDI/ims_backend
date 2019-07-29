@@ -32,8 +32,28 @@ import java.util.Date;
                 })
 })
 @NamedNativeQuery(
-        name = "LevelsCountQuery",
-        query = "select level, count(*) from candidate group by level order by level",
+        name = "LevelsCurrentYearCountQuery",
+        query = "select level, count(*) from candidate join interviews i on candidate.id = i.candidate_id\n" +
+                "where date_part('year', i.date) = date_part('year', CURRENT_DATE)\n" +
+                "group by level order by level",
+        resultSetMapping = "LevelsCount")
+@NamedNativeQuery(
+        name = "LevelsPrevYearCountQuery",
+        query = "select level, count(*) from candidate join interviews i on candidate.id = i.candidate_id\n" +
+                "WHERE i.date >= date_trunc('year', current_date - interval '1' month)\n" +
+                "and i.date < date_trunc('year', current_date) group by level order by level",
+        resultSetMapping = "LevelsCount")
+@NamedNativeQuery(
+        name = "LevelsCurrentMonthCountQuery",
+        query = "select level, count(*) from candidate join interviews i on candidate.id = i.candidate_id\n" +
+                "where date_part('month', i.date) = date_part('month', CURRENT_DATE)\n" +
+                "group by level order by level",
+        resultSetMapping = "LevelsCount")
+@NamedNativeQuery(
+        name = "LevelsPrevMonthCountQuery",
+        query = "select level, count(*) from candidate join interviews i on candidate.id = i.candidate_id\n" +
+                "WHERE i.date >= date_trunc('month', current_date - interval '1' month)\n" +
+                "and i.date < date_trunc('month', current_date) group by level order by level",
         resultSetMapping = "LevelsCount")
 @NamedNativeQuery(
         name = "LocationsCurrentYearCountQuery",
