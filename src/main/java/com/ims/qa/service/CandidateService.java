@@ -1,5 +1,6 @@
 package com.ims.qa.service;
 
+import com.ims.qa.dto.CandidateDetailsDTO;
 import com.ims.qa.dto.CandidateLevelDTO;
 import com.ims.qa.dto.CandidateLocationDTO;
 import com.ims.qa.enums.CandidateStatus;
@@ -20,7 +21,7 @@ public class CandidateService {
     private CandidateRepository candidateRepository;
 
     public Iterable<Candidate> getAll(int page, int size){
-        Pageable pageWithSize = PageRequest.of(page, size, Sort.by("startDate").ascending().and(Sort.by("lastname").ascending()));
+        Pageable pageWithSize = PageRequest.of(page, size, Sort.by("id").descending().and(Sort.by("lastname").ascending()));
         return candidateRepository.findAllByActiveTrue(pageWithSize);
     }
 
@@ -60,5 +61,23 @@ public class CandidateService {
         }
 
         return null;
+    }
+
+    public Candidate addCandidate(CandidateDetailsDTO candidateDetailsDTO){
+        Candidate candidate;
+        if(candidateRepository.checkCandidateExists(candidateDetailsDTO.getFirstname(), candidateDetailsDTO.getLastname()) > 0){
+            throw new RuntimeException("Candidate already exists in database");
+        }
+
+        candidate = new Candidate();
+        candidate.setFirstname(candidateDetailsDTO.getFirstname());
+        candidate.setLastname(candidateDetailsDTO.getLastname());
+        candidate.setLevel(candidateDetailsDTO.getLevel());
+        candidate.setLocation(candidateDetailsDTO.getLocation());
+        candidate.setCandidateStatus(candidateDetailsDTO.getCandidateStatus());
+        candidate.setSkills(candidateDetailsDTO.getSkills());
+        candidate.setComment(candidateDetailsDTO.getComment());
+
+        return candidateRepository.save(candidate);
     }
 }

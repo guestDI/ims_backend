@@ -1,5 +1,7 @@
 package com.ims.qa.model;
 
+import com.ims.qa.dto.CandidateLevelDTO;
+import com.ims.qa.dto.InterviewStatisticDTO;
 import com.ims.qa.enums.InterviewStatus;
 import lombok.*;
 
@@ -15,6 +17,23 @@ import java.util.List;
 @Entity
 @Table(name = "interviews")
 @Builder
+@SqlResultSetMapping(name="InterviewsByYear", classes = {
+        @ConstructorResult(targetClass = InterviewStatisticDTO.class,
+                columns = {
+                        @ColumnResult(name="month", type = Date.class),
+                        @ColumnResult(name="count", type = Integer.class),
+                })
+})
+@NamedNativeQuery(
+        name = "InterviewsCurrentYearCountQuery",
+        query = "select date_trunc( 'month', date ) as month , count(*) from interviews where date_part('year', date) = date_part('year', CURRENT_DATE)\n" +
+                "group by date_trunc( 'month', date ) order by date_trunc( 'month', date ) asc",
+        resultSetMapping = "InterviewsByYear")
+@NamedNativeQuery(
+        name = "InterviewsPrevYearCountQuery",
+        query = "select date_trunc( 'month', date ) as month , count(*) from interviews WHERE date >= date_trunc('year', current_date - interval '1' month)\n" +
+                "and date < date_trunc('year', current_date) group by date_trunc( 'month', date ) order by date_trunc( 'month', date ) asc",
+        resultSetMapping = "InterviewsByYear")
 public class Interview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +45,9 @@ public class Interview {
 
     @Column
     private Date date = new Date();
+
+    @Column(columnDefinition = "text")
+    private String comment;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(

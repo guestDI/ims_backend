@@ -31,7 +31,8 @@ import java.util.List;
                         @ColumnResult(name="active", type = Boolean.class),
                         @ColumnResult(name="profile_photo", type = String.class),
                         @ColumnResult(name="count", type = Integer.class),
-                        @ColumnResult(name="lastInterviewDate", type = Date.class)
+                        @ColumnResult(name="lastInterviewDate", type = Date.class),
+                        @ColumnResult(name="skills", type = String.class)
                 })
 })
 @SqlResultSetMapping(name="TopInterviewers", classes = {
@@ -89,7 +90,8 @@ public class Interviewer {
     private boolean active;
     @Column
     private String profilePhoto;
-
+    @Column(columnDefinition = "text")
+    private String skills;
     @JsonIgnore
     @ManyToMany(mappedBy = "interviewers", cascade = {CascadeType.ALL})
     private List<Interview> interviews;
@@ -105,6 +107,12 @@ public class Interviewer {
         this.level = level;
         this.email = email;
         this.location = location;
+    }
+
+    public Interviewer(String firstname, String lastname, String email){
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
     }
 
     public Interviewer(String firstname, String lastname, String email, String location, Level level, String photoUrl){

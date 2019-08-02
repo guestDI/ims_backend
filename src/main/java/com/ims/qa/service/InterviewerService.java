@@ -37,6 +37,8 @@ public class InterviewerService {
         interviewer.setFirstname(updateInterviewerDTO.getFirstname());
         interviewer.setLastname(updateInterviewerDTO.getLastname());
         interviewer.setEmail(updateInterviewerDTO.getEmail());
+        interviewer.setLevel(updateInterviewerDTO.getLevel());
+        interviewer.setSkills(updateInterviewerDTO.getSkills());
 
         Interviewer updated = interviewerRepository.save(interviewer);
 

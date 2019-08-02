@@ -1,5 +1,6 @@
 package com.ims.qa.controller;
 
+import com.ims.qa.dto.InterviewStatisticDTO;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.enums.InterviewStatus;
 import com.ims.qa.model.Interview;
@@ -28,6 +29,11 @@ public class InterviewController {
     @RequestMapping(value = "/getNumberOfAllInterviews", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Integer getNumberOfInterviews(){
         return interviewService.getNumberOfAllInterviews();
+    }
+
+    @RequestMapping(value = "/getNumberOfInterviewsByDate/{date}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<InterviewStatisticDTO> getNumberOfInterviewsByDate(@PathVariable ("date") String date ){
+        return interviewService.getNumberOfInterviewsByDate(date);
     }
 
 //    @RequestMapping(value = "/getNumberOfAllInterviewsByStatus/{interviewStatus}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,9 +1,11 @@
 package com.ims.qa.service;
 
+import com.ims.qa.dto.InterviewStatisticDTO;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.enums.InterviewStatus;
 import com.ims.qa.model.Interview;
 import com.ims.qa.repository.InterviewRepository;
+import org.hibernate.exception.SQLGrammarException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,4 +35,19 @@ public class InterviewService {
 //    public Integer getNumberOfInterviewsByStatus(InterviewStatus interviewStatus){
 //        return interviewRepository.countAllByActiveTrueAndStatusEquals(interviewStatus);
 //    }
+
+    public Iterable<InterviewStatisticDTO> getNumberOfInterviewsByDate(String date){
+        try{
+            if(date.equals("prevYear")){
+                return interviewRepository.getDateWithNumberPrevYear();
+            } else if(date.equals("currentYear")){
+                return interviewRepository.getDateWithNumberCurrentYear();
+            }
+        } catch (SQLGrammarException se){
+            se.getCause();
+
+        }
+
+        return null;
+    }
 }

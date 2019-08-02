@@ -77,6 +77,10 @@ import java.util.Date;
                 "WHERE i.date >= date_trunc('month', current_date - interval '1' month)\n" +
                 "and i.date < date_trunc('month', current_date) group by location;",
         resultSetMapping = "LocationsCount")
+@NamedNativeQuery(
+        name="CheckCandidateExists",
+        query = "SELECT count(*) from candidate c where c.firstname=?1 and c.lastname=?2"
+)
 public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -92,8 +96,10 @@ public class Candidate {
     @Enumerated(EnumType.STRING)
     private Location location;
     @Column(columnDefinition = "text")
+    private String skills;
+    @Column(columnDefinition = "text")
     private String comment;
-    private Date startDate = new Date();
+    private Date startDate;
     @Column(nullable = false)
     private boolean active;
     @Column
@@ -118,6 +124,16 @@ public class Candidate {
         this.location = location;
         this.level = level;
         this.candidateStatus = candidateStatus;
+    }
+
+    public Candidate(String firstname, String lastname, Location location, Level level, CandidateStatus candidateStatus,
+                     String comment) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.location = location;
+        this.level = level;
+        this.candidateStatus = candidateStatus;
+        this.comment = comment;
     }
 
 }

@@ -11,7 +11,8 @@ create table candidate
 	level varchar(255),
 	location varchar(255) not null,
 	start_date timestamp,
-	candidate_status varchar(255)
+	candidate_status varchar(255),
+	skills text
 );
 
 alter table candidate owner to adminims;
@@ -29,7 +30,8 @@ create table interviewer
 	location varchar(255) not null,
 	password varchar(255),
 	profile_photo varchar(255),
-	username varchar(255)
+	username varchar(255),
+	skills text
 );
 
 alter table interviewer owner to adminims;
@@ -40,6 +42,7 @@ create table interviews
 		constraint interviews_pkey
 			primary key,
 	active boolean not null,
+	comment text,
 	date timestamp,
 	interview_status varchar(255),
 	candidate_id bigint

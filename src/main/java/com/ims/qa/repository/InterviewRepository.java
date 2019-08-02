@@ -1,7 +1,7 @@
 package com.ims.qa.repository;
 
-import com.ims.qa.enums.CandidateStatus;
-import com.ims.qa.enums.InterviewStatus;
+import com.ims.qa.dto.CandidateLocationDTO;
+import com.ims.qa.dto.InterviewStatisticDTO;
 import com.ims.qa.model.Interview;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,6 +22,14 @@ public interface InterviewRepository extends JpaRepository<Interview, Long> {
 
     int countAllByActiveTrue();
 
-//    int countAllByActiveTrueAndStatusEquals(@Param("interviewStatus") InterviewStatus interviewStatus);
+    @Query(
+            name = "InterviewsCurrentYearCountQuery",
+            nativeQuery = true)
+    List<InterviewStatisticDTO> getDateWithNumberCurrentYear();
+
+    @Query(
+            name = "InterviewsPrevYearCountQuery",
+            nativeQuery = true)
+    List<InterviewStatisticDTO> getDateWithNumberPrevYear();
 
 }

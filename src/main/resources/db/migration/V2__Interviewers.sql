@@ -17,7 +17,7 @@ INSERT INTO interviewer VALUES
 	INSERT INTO interviewer VALUES
     (9, TRUE, 'v.mukasei@godeltech.com', 'Volha', 'Mukasei', 'SENIOR', 'MINSK_RUBIN', DEFAULT, 'https://res.cloudinary.com/dxp2voatn/image/upload/v1561473149/ims/interviewers/v_mukasei.png', DEFAULT);
 	INSERT INTO interviewer VALUES
-    (10, TRUE, 'n.kurilenko@godeltech.com', 'Natalia', 'Kurilenko', 'LEAD', 'GOMEL', DEFAULT, 'https://res.cloudinary.com/dxp2voatn/image/upload/v1561473148/ims/interviewers/n_kurilenko.png', DEFAULT);
+    (10, TRUE, 'n.samarava@godeltech.com', 'Natalia', 'Samarava', 'SENIOR', 'MINSK_RUBIN', DEFAULT, 'https://res.cloudinary.com/dxp2voatn/image/upload/v1564652503/ims/interviewers/n_samarava.png', DEFAULT);
 	INSERT INTO interviewer VALUES
     (11, TRUE, 's.milaserdov@godeltech.com', 'Semen', 'Milaserdov', 'SENIOR', 'BREST', DEFAULT, 'https://res.cloudinary.com/dxp2voatn/image/upload/v1561473148/ims/interviewers/s_milaserdov.png', DEFAULT);
 	INSERT INTO interviewer VALUES

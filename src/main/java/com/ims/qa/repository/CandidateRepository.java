@@ -62,4 +62,8 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
     List<CandidateLocationDTO> findLocationsWithNumberPrevMonth();
 
     int countAllByActiveTrueAndCandidateStatusEquals(@Param("candidateStatus") CandidateStatus candidateStatus);
+
+    @Query(name = "CheckCandidateExists",
+            nativeQuery = true)
+    int checkCandidateExists(@Param("firstname") String firstname, @Param("lastname") String lastname);
 }

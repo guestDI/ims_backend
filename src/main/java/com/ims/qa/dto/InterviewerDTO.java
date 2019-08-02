@@ -22,4 +22,5 @@ public class InterviewerDTO {
     private String profilePhoto;
     private int totalInterviews;
     private Date lastInterviewDate;
+    private String skills;
 }
