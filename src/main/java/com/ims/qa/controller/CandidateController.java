@@ -3,6 +3,7 @@ package com.ims.qa.controller;
 import com.ims.qa.dto.CandidateDetailsDTO;
 import com.ims.qa.dto.CandidateLevelDTO;
 import com.ims.qa.dto.CandidateLocationDTO;
+import com.ims.qa.dto.UpdateCandidateDTO;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.model.Candidate;
 import com.ims.qa.service.CandidateService;
@@ -47,6 +48,10 @@ public class CandidateController {
     @RequestMapping(value = "/addCandidate", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public Candidate addCandidate(@RequestBody CandidateDetailsDTO candidate) {
         return candidateService.addCandidate(candidate);
+    }
 
+    @RequestMapping(value = "/updateCandidateProfile", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Candidate updateCandidate(@RequestBody UpdateCandidateDTO updateCandidateDTO) {
+        return candidateService.updateCandidateProfile(updateCandidateDTO);
     }
 }

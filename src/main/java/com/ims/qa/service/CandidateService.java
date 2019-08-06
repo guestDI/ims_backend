@@ -3,6 +3,7 @@ package com.ims.qa.service;
 import com.ims.qa.dto.CandidateDetailsDTO;
 import com.ims.qa.dto.CandidateLevelDTO;
 import com.ims.qa.dto.CandidateLocationDTO;
+import com.ims.qa.dto.UpdateCandidateDTO;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.model.Candidate;
 import com.ims.qa.repository.CandidateRepository;
@@ -79,5 +80,20 @@ public class CandidateService {
         candidate.setComment(candidateDetailsDTO.getComment());
 
         return candidateRepository.save(candidate);
+    }
+
+    public Candidate updateCandidateProfile(UpdateCandidateDTO updateCandidateDTO){
+        Candidate candidate = candidateRepository.findById(updateCandidateDTO.getId())
+                .orElseThrow(NullPointerException::new);
+
+        candidate.setFirstname(updateCandidateDTO.getFirstname());
+        candidate.setLastname(updateCandidateDTO.getLastname());
+        candidate.setLocation(updateCandidateDTO.getLocation());
+        candidate.setLevel(updateCandidateDTO.getLevel());
+        candidate.setSkills(updateCandidateDTO.getSkills());
+        candidate.setComment(updateCandidateDTO.getComment());
+
+        return candidateRepository.save(candidate);
+
     }
 }

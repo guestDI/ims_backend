@@ -1,6 +1,7 @@
 package com.ims.qa.repository;
 
 import com.ims.qa.dto.CandidateLocationDTO;
+import com.ims.qa.dto.InterviewCandidateDTO;
 import com.ims.qa.dto.InterviewStatisticDTO;
 import com.ims.qa.model.Interview;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -32,4 +34,6 @@ public interface InterviewRepository extends JpaRepository<Interview, Long> {
             nativeQuery = true)
     List<InterviewStatisticDTO> getDateWithNumberPrevYear();
 
+    @Query("Select i.date  from Interview i where i.active = true and i.id = :id")
+    Date getInterviewDateByCandidateId(@Param("id") Long id);
 }

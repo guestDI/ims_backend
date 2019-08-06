@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/v1/interviews")
@@ -35,6 +37,12 @@ public class InterviewController {
     public Iterable<InterviewStatisticDTO> getNumberOfInterviewsByDate(@PathVariable ("date") String date ){
         return interviewService.getNumberOfInterviewsByDate(date);
     }
+
+    @RequestMapping(value = "/getInterviewByCandidateId/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Date getInterviewDate(@PathVariable ("id") Long id ){
+        return interviewService.getInterviewDateForCandidate(id);
+    }
+
 
 //    @RequestMapping(value = "/getNumberOfAllInterviewsByStatus/{interviewStatus}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 //    public Integer getNumberOfInterviewsByStatus(@PathVariable("interviewStatus") InterviewStatus interviewStatus){

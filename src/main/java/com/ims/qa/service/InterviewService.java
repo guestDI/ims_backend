@@ -13,6 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import java.util.Date;
+
 @Service
 @Transactional
 public class InterviewService {
@@ -49,5 +51,9 @@ public class InterviewService {
         }
 
         return null;
+    }
+
+    public Date getInterviewDateForCandidate(Long id){
+        return interviewRepository.getInterviewDateByCandidateId(id);
     }
 }
