@@ -1,5 +1,7 @@
 package com.ims.qa.service;
 
+import com.ims.qa.converter.InterviewConverter;
+import com.ims.qa.dto.InterviewDTO;
 import com.ims.qa.dto.InterviewStatisticDTO;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.enums.InterviewStatus;
@@ -20,6 +22,9 @@ import java.util.Date;
 public class InterviewService {
     @Autowired
     private InterviewRepository interviewRepository;
+
+    @Autowired
+    private InterviewConverter interviewConverter;
 
     public Iterable<Interview> getAll(int page, int size){
         Pageable pageWithSize = PageRequest.of(page, size, Sort.by("date").descending());
@@ -56,4 +61,13 @@ public class InterviewService {
     public Date getInterviewDateForCandidate(Long id){
         return interviewRepository.getInterviewDateByCandidateId(id);
     }
+
+    public InterviewDTO create(InterviewDTO dto) {
+        Interview entity = interviewConverter.convert(dto);
+        entity = interviewRepository.save(entity);
+
+        return interviewConverter.convert(entity);
+    }
+
+//    public Interview addInterviewRecord()
 }

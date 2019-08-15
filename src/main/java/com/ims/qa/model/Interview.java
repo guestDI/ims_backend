@@ -68,6 +68,13 @@ public class Interview {
         this.interviewStatus = interviewStatus;
     }
 
+    public Interview(Candidate candidate, ArrayList<Interviewer> interviewers, InterviewStatus interviewStatus, Date date) {
+        this.candidate = candidate;
+        this.interviewers = interviewers;
+        this.interviewStatus = interviewStatus;
+        this.date = date;
+    }
+
     @PrePersist
     public void prePersist() {
         this.active = true;
