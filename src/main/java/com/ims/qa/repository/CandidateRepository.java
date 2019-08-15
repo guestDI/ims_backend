@@ -21,6 +21,8 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
 
     int countAllByActiveTrue();
 
+    Candidate findCandidateByActiveTrueAndId(Long Id);
+
     @Query(
             name = "LevelsCurrentYearCountQuery",
             nativeQuery = true)

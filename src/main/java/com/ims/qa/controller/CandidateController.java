@@ -6,6 +6,7 @@ import com.ims.qa.dto.CandidateLocationDTO;
 import com.ims.qa.dto.UpdateCandidateDTO;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.model.Candidate;
+import com.ims.qa.repository.CandidateRepository;
 import com.ims.qa.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,6 +19,9 @@ public class CandidateController {
 
     @Autowired
     private CandidateService candidateService;
+
+    @Autowired
+    private CandidateRepository candidateRepository;
 
     @RequestMapping(value = "/getAllCandidates/{page}/{size}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Candidate> findAll(@PathVariable("page") int page, @PathVariable("size") int size) {
@@ -53,5 +57,10 @@ public class CandidateController {
     @RequestMapping(value = "/updateCandidateProfile", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public Candidate updateCandidate(@RequestBody UpdateCandidateDTO updateCandidateDTO) {
         return candidateService.updateCandidateProfile(updateCandidateDTO);
+    }
+
+    @RequestMapping(value = "/getCandidateInfo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Candidate getCandidateInfoById(@PathVariable("id") Long id){
+        return candidateRepository.findCandidateByActiveTrueAndId(id);
     }
 }
