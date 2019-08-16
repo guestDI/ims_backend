@@ -6,6 +6,7 @@ import com.ims.qa.enums.InterviewStatus;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +45,7 @@ public class Interview {
     private Candidate candidate;
 
     @Column
-    private Date date = new Date();
+    private ZonedDateTime date;
 
     @Column(columnDefinition = "text")
     private String comment;
@@ -68,7 +69,7 @@ public class Interview {
         this.interviewStatus = interviewStatus;
     }
 
-    public Interview(Candidate candidate, ArrayList<Interviewer> interviewers, InterviewStatus interviewStatus, Date date) {
+    public Interview(Candidate candidate, ArrayList<Interviewer> interviewers, InterviewStatus interviewStatus, ZonedDateTime date) {
         this.candidate = candidate;
         this.interviewers = interviewers;
         this.interviewStatus = interviewStatus;

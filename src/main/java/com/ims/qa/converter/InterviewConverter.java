@@ -32,6 +32,7 @@ public class InterviewConverter {
                 .date(dto.getDate())
                 .interviewers(interviewers)
                 .interviewStatus(dto.getStatus())
+                .comment(dto.getComment())
                 .build();
 
     }
@@ -45,9 +46,11 @@ public class InterviewConverter {
 
         return InterviewDTO.builder()
                 .id(entity.getId())
+                .candidateId(entity.getCandidate().getId())
                 .date(entity.getDate())
                 .interviewers(interviewers)
                 .status(entity.getInterviewStatus())
+                .comment(entity.getComment())
                 .build();
     }
 

@@ -16,6 +16,7 @@ public class InterviewDTO {
     private Long id;
     private Long candidateId;
     private List<InterviewerDTO> interviewers;
-    private Date date;
+    private ZonedDateTime date;
     private InterviewStatus status;
+    private String comment;
 }
