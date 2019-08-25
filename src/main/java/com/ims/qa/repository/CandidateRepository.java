@@ -2,6 +2,7 @@ package com.ims.qa.repository;
 
 import com.ims.qa.dto.CandidateLevelDTO;
 import com.ims.qa.dto.CandidateLocationDTO;
+import com.ims.qa.dto.NewcomerDTO;
 import com.ims.qa.dto.TopInterviewerDTO;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.model.Candidate;
@@ -13,6 +14,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface CandidateRepository extends JpaRepository<Candidate, Long> {
@@ -68,4 +70,10 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
     @Query(name = "CheckCandidateExists",
             nativeQuery = true)
     int checkCandidateExists(@Param("firstname") String firstname, @Param("lastname") String lastname);
+
+    @Query(name = "SelectNewcomersQuery",
+            nativeQuery = true)
+    List<NewcomerDTO> getNewcomers();
+
+//    List<Candidate> findTop5ByActiveTrueAndCandidateStatusInAndStartDateNotNullOrderByStartDateDesc(Set<String> candidateStatuses);
 }

@@ -2,6 +2,7 @@ package com.ims.qa.model;
 
 import com.ims.qa.dto.CandidateLevelDTO;
 import com.ims.qa.dto.CandidateLocationDTO;
+import com.ims.qa.dto.NewcomerDTO;
 import com.ims.qa.enums.Level;
 import com.ims.qa.enums.Location;
 import com.ims.qa.enums.CandidateStatus;
@@ -29,6 +30,15 @@ import java.util.Date;
                 columns = {
                         @ColumnResult(name="location", type = String.class),
                         @ColumnResult(name="count", type = Integer.class),
+                })
+})
+@SqlResultSetMapping(name="Newcomers", classes = {
+        @ConstructorResult(targetClass = NewcomerDTO.class,
+                columns = {
+                        @ColumnResult(name="id", type = Long.class),
+                        @ColumnResult(name="firstname", type = String.class),
+                        @ColumnResult(name="lastname", type = String.class),
+                        @ColumnResult(name="startDate", type = Date.class),
                 })
 })
 @NamedNativeQuery(
@@ -80,6 +90,13 @@ import java.util.Date;
 @NamedNativeQuery(
         name="CheckCandidateExists",
         query = "SELECT count(*) from candidate c where c.firstname=?1 and c.lastname=?2"
+)
+@NamedNativeQuery(
+        name="SelectNewcomersQuery",
+        query = "select id, firstname, lastname, start_date as startDate from candidate\n" +
+                "where active=true and start_date NOTNULL and start_date > CURRENT_DATE and candidate_status in ('STARTED', 'JO_MADE')\n" +
+                "order by start_date asc limit 5",
+        resultSetMapping = "Newcomers"
 )
 public class Candidate {
     @Id

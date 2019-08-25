@@ -1,9 +1,6 @@
 package com.ims.qa.controller;
 
-import com.ims.qa.dto.CandidateDetailsDTO;
-import com.ims.qa.dto.CandidateLevelDTO;
-import com.ims.qa.dto.CandidateLocationDTO;
-import com.ims.qa.dto.UpdateCandidateDTO;
+import com.ims.qa.dto.*;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.model.Candidate;
 import com.ims.qa.repository.CandidateRepository;
@@ -62,5 +59,10 @@ public class CandidateController {
     @RequestMapping(value = "/getCandidateInfo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Candidate getCandidateInfoById(@PathVariable("id") Long id){
         return candidateRepository.findCandidateByActiveTrueAndId(id);
+    }
+
+    @RequestMapping(value = "/getNewcomers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<NewcomerDTO> getCandidatesAndStartDate(){
+        return candidateService.getCandidatesWithStartDate();
     }
 }

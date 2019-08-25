@@ -2,6 +2,7 @@ package com.ims.qa.dto;
 
 import lombok.*;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Getter
@@ -10,5 +11,5 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class InterviewCandidateDTO {
-    private Date date;
+    private ZonedDateTime date;
 }

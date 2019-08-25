@@ -50,7 +50,7 @@ public class Interview {
     @Column(columnDefinition = "text")
     private String comment;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany
     @JoinTable(
             name = "interview_interviewer",
             joinColumns = { @JoinColumn(name = "interview_id") },

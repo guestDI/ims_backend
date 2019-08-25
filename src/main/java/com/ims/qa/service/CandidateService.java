@@ -1,9 +1,6 @@
 package com.ims.qa.service;
 
-import com.ims.qa.dto.CandidateDetailsDTO;
-import com.ims.qa.dto.CandidateLevelDTO;
-import com.ims.qa.dto.CandidateLocationDTO;
-import com.ims.qa.dto.UpdateCandidateDTO;
+import com.ims.qa.dto.*;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.model.Candidate;
 import com.ims.qa.repository.CandidateRepository;
@@ -13,6 +10,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.EnumSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static com.ims.qa.enums.CandidateStatus.JO_ACCEPTED;
+import static com.ims.qa.enums.CandidateStatus.STARTED;
 
 @Service
 @Transactional
@@ -95,5 +99,11 @@ public class CandidateService {
 
         return candidateRepository.save(candidate);
 
+    }
+
+    public Iterable<NewcomerDTO> getCandidatesWithStartDate() {
+//        statuses.forEach(System.out::println);
+
+        return candidateRepository.getNewcomers();
     }
 }

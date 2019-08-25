@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Service
@@ -39,10 +40,6 @@ public class InterviewService {
         return interviewRepository.countAllByActiveTrue();
     }
 
-//    public Integer getNumberOfInterviewsByStatus(InterviewStatus interviewStatus){
-//        return interviewRepository.countAllByActiveTrueAndStatusEquals(interviewStatus);
-//    }
-
     public Iterable<InterviewStatisticDTO> getNumberOfInterviewsByDate(String date){
         try{
             if(date.equals("prevYear")){
@@ -58,7 +55,7 @@ public class InterviewService {
         return null;
     }
 
-    public Date getInterviewDateForCandidate(Long id){
+    public ZonedDateTime getInterviewDateForCandidate(Long id){
         return interviewRepository.getInterviewDateByCandidateId(id);
     }
 
@@ -69,5 +66,8 @@ public class InterviewService {
         return interviewConverter.convert(entity);
     }
 
-//    public Interview addInterviewRecord()
+    public void delete(Long id){
+        interviewRepository.deleteById(id);
+    }
+
 }

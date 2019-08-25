@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.Pageable;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -35,5 +36,6 @@ public interface InterviewRepository extends JpaRepository<Interview, Long> {
     List<InterviewStatisticDTO> getDateWithNumberPrevYear();
 
     @Query("Select i.date  from Interview i where i.active = true and i.id = :id")
-    Date getInterviewDateByCandidateId(@Param("id") Long id);
+    ZonedDateTime getInterviewDateByCandidateId(@Param("id") Long id);
+
 }
