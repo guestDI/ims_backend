@@ -2,11 +2,13 @@ package com.ims.qa.converter;
 
 import com.ims.qa.dto.InterviewDTO;
 import com.ims.qa.dto.InterviewerDTO;
+import com.ims.qa.dto.UpdateInterviewDTO;
 import com.ims.qa.model.Candidate;
 import com.ims.qa.model.Interview;
 import com.ims.qa.model.Interviewer;
 import com.ims.qa.repository.CandidateRepository;
 import com.ims.qa.repository.InterviewerRepository;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +30,7 @@ public class InterviewConverter {
                 .collect(Collectors.toList());
 
         return Interview.builder()
+                .id(dto.getId())
                 .candidate(candidate)
                 .date(dto.getDate())
                 .interviewers(interviewers)
@@ -37,12 +40,27 @@ public class InterviewConverter {
 
     }
 
-    public InterviewDTO convert(Interview entity) {
+    public Interview convert(InterviewDTO dto, Interview interview){
+        if (dto == null) {
+            return null;
+        }
 
+            List<Interviewer> interviewers = dto.getInterviewers().stream()
+            .map(interviewerDTO -> interviewerRepository.getOne(interviewerDTO.getId()))
+            .collect(Collectors.toList());
+
+        return interview.toBuilder()
+                .date(dto.getDate())
+                .interviewers(interviewers)
+                .interviewStatus(dto.getStatus())
+                .comment(dto.getComment())
+                .build();
+    }
+
+    public InterviewDTO convert(Interview entity) {
         List<InterviewerDTO> interviewers = entity.getInterviewers().stream()
                 .map(this::convertInterviewer)
                 .collect(Collectors.toList());
-
 
         return InterviewDTO.builder()
                 .id(entity.getId())
@@ -61,4 +79,5 @@ public class InterviewConverter {
                 .lastname(interviewer.getLastname())
                 .build();
     }
+
 }

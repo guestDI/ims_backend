@@ -3,6 +3,7 @@ package com.ims.qa.repository;
 import com.ims.qa.dto.CandidateLocationDTO;
 import com.ims.qa.dto.InterviewCandidateDTO;
 import com.ims.qa.dto.InterviewStatisticDTO;
+import com.ims.qa.dto.UpdateInterviewDTO;
 import com.ims.qa.model.Interview;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -37,5 +38,4 @@ public interface InterviewRepository extends JpaRepository<Interview, Long> {
 
     @Query("Select i.date  from Interview i where i.active = true and i.id = :id")
     ZonedDateTime getInterviewDateByCandidateId(@Param("id") Long id);
-
 }

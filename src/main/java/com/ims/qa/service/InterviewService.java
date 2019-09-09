@@ -3,10 +3,16 @@ package com.ims.qa.service;
 import com.ims.qa.converter.InterviewConverter;
 import com.ims.qa.dto.InterviewDTO;
 import com.ims.qa.dto.InterviewStatisticDTO;
+import com.ims.qa.dto.UpdateInterviewDTO;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.enums.InterviewStatus;
+import com.ims.qa.model.Candidate;
 import com.ims.qa.model.Interview;
+import com.ims.qa.model.Interviewer;
+import com.ims.qa.repository.CandidateRepository;
 import com.ims.qa.repository.InterviewRepository;
+import com.ims.qa.repository.InterviewerRepository;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.hibernate.exception.SQLGrammarException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +23,21 @@ import org.springframework.data.domain.Sort;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class InterviewService {
     @Autowired
     private InterviewRepository interviewRepository;
+
+    @Autowired
+    private InterviewerRepository interviewerRepository;
+
+    @Autowired
+    private CandidateRepository candidateRepository;
+
 
     @Autowired
     private InterviewConverter interviewConverter;
@@ -70,4 +85,14 @@ public class InterviewService {
         interviewRepository.deleteById(id);
     }
 
+    public InterviewDTO update(InterviewDTO dto) throws RuntimeException {
+        Interview entity = interviewRepository.findById(dto.getId())
+                .orElseThrow(()-> new RuntimeException("Interview with id=" + dto.getId() + " not found"));
+
+        entity = interviewConverter.convert(dto, entity);
+
+        interviewRepository.save(entity);
+
+        return interviewConverter.convert(entity);
+    }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "interviews")
-@Builder
+@Builder(toBuilder = true)
 @SqlResultSetMapping(name="InterviewsByYear", classes = {
         @ConstructorResult(targetClass = InterviewStatisticDTO.class,
                 columns = {
@@ -76,8 +76,16 @@ public class Interview {
         this.date = date;
     }
 
+    public Interview(ArrayList<Interviewer> interviewers, InterviewStatus interviewStatus, ZonedDateTime date, String comment) {
+        this.interviewers = interviewers;
+        this.interviewStatus = interviewStatus;
+        this.date = date;
+        this.comment = comment;
+    }
+
     @PrePersist
     public void prePersist() {
         this.active = true;
     }
+
 }

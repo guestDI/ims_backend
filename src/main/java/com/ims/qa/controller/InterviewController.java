@@ -2,6 +2,7 @@ package com.ims.qa.controller;
 
 import com.ims.qa.dto.InterviewDTO;
 import com.ims.qa.dto.InterviewStatisticDTO;
+import com.ims.qa.dto.UpdateInterviewDTO;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.enums.InterviewStatus;
 import com.ims.qa.model.Interview;
@@ -52,6 +53,12 @@ public class InterviewController {
     public InterviewDTO create(@RequestBody InterviewDTO dto) {
         //validator
         return interviewService.create(dto);
+    }
+
+    @RequestMapping(value = "/updateInterview", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public InterviewDTO update(@RequestBody InterviewDTO dto) {
+        //validator
+        return interviewService.update(dto);
     }
 
     @RequestMapping(value = "/deleteInterview/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
