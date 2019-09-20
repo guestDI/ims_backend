@@ -1,9 +1,6 @@
 package com.ims.qa.repository;
 
-import com.ims.qa.dto.CandidateLevelDTO;
-import com.ims.qa.dto.CandidateLocationDTO;
-import com.ims.qa.dto.NewcomerDTO;
-import com.ims.qa.dto.TopInterviewerDTO;
+import com.ims.qa.dto.*;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.model.Candidate;
 import com.ims.qa.model.Candidate;
@@ -74,6 +71,10 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
     @Query(name = "SelectNewcomersQuery",
             nativeQuery = true)
     List<NewcomerDTO> getNewcomers();
+
+    @Query(name = "SelectCandidateWithLocationAndLevel",
+            nativeQuery = true)
+    List<CandidateDTO> selectCandidateWilLocationAndLevel(@Param("paramLike") String paramLike, Pageable pageable);
 
 //    List<Candidate> findTop5ByActiveTrueAndCandidateStatusInAndStartDateNotNullOrderByStartDateDesc(Set<String> candidateStatuses);
 }

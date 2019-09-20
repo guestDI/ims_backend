@@ -1,5 +1,6 @@
 package com.ims.qa.model;
 
+import com.ims.qa.dto.CandidateDTO;
 import com.ims.qa.dto.CandidateLevelDTO;
 import com.ims.qa.dto.CandidateLocationDTO;
 import com.ims.qa.dto.NewcomerDTO;
@@ -39,6 +40,16 @@ import java.util.Date;
                         @ColumnResult(name="firstname", type = String.class),
                         @ColumnResult(name="lastname", type = String.class),
                         @ColumnResult(name="startDate", type = Date.class),
+                })
+})
+@SqlResultSetMapping(name="CandidateLocationLevel", classes = {
+        @ConstructorResult(targetClass = CandidateDTO.class,
+                columns = {
+                        @ColumnResult(name="id", type = Long.class),
+                        @ColumnResult(name="firstname", type = String.class),
+                        @ColumnResult(name="lastname", type = String.class),
+                        @ColumnResult(name="level", type = String.class),
+                        @ColumnResult(name="location", type = String.class),
                 })
 })
 @NamedNativeQuery(
@@ -97,6 +108,12 @@ import java.util.Date;
                 "where active=true and start_date NOTNULL and start_date > CURRENT_DATE and candidate_status in ('STARTED', 'JO_MADE')\n" +
                 "order by start_date asc limit 5",
         resultSetMapping = "Newcomers"
+)
+@NamedNativeQuery(
+        name="SelectCandidateWithLocationAndLevel",
+        query = "SELECT id, firstname, lastname, level, location from candidate\n" +
+                "where candidate_status != 'STARTED' and (lower(lastname) like ?1 or lower(firstname) like ?1)",
+        resultSetMapping = "CandidateLocationLevel"
 )
 public class Candidate {
     @Id

@@ -106,4 +106,10 @@ public class CandidateService {
 
         return candidateRepository.getNewcomers();
     }
+
+    public Iterable<CandidateDTO> getCandidateWithLocationAndLevel(String query, int page, int size){
+        String paramLike = "%" + query + "%";
+        Pageable pageWithSize = PageRequest.of(page, size, Sort.by("id").descending().and(Sort.by("lastname").ascending()));
+        return candidateRepository.selectCandidateWilLocationAndLevel(paramLike, pageWithSize);
+    }
 }

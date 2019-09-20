@@ -65,4 +65,9 @@ public class CandidateController {
     public Iterable<NewcomerDTO> getCandidatesAndStartDate(){
         return candidateService.getCandidatesWithStartDate();
     }
+
+    @RequestMapping(value = "/getCandidatesByQuery/{name}/{page}/{size}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<CandidateDTO> getCandidatesByQuery(@PathVariable("name") String name, @PathVariable("page") int page, @PathVariable("size") int size) {
+        return candidateService.getCandidateWithLocationAndLevel(name, page, size);
+    }
 }
