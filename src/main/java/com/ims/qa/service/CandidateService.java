@@ -107,9 +107,15 @@ public class CandidateService {
         return candidateRepository.getNewcomers();
     }
 
-    public Iterable<CandidateDTO> getCandidateWithLocationAndLevel(String query, int page, int size){
-        String paramLike = "%" + query + "%";
-        Pageable pageWithSize = PageRequest.of(page, size, Sort.by("id").descending().and(Sort.by("lastname").ascending()));
-        return candidateRepository.selectCandidateWilLocationAndLevel(paramLike, pageWithSize);
+    public Iterable<CandidateDTO> getCandidateWithLocationAndLevel(CandidateSearchDTO candidateSearchDTO){
+        String name = "%" + candidateSearchDTO.getName() + "%";
+        Pageable pageable = candidateSearchDTO.getPage() == null ? Pageable.unpaged() : PageRequest.of(candidateSearchDTO.getPage(),
+                candidateSearchDTO.getSize(), Sort.by(Sort.Direction.DESC, "id").and(Sort.by(Sort.Direction.ASC, "lastname")));
+        return candidateRepository.selectCandidateWilLocationAndLevel(name, pageable);
+//                .map(simCardMapper::toSimCardDto);
+
+
+//        Pageable pageWithSize = PageRequest.of(page, size, Sort.by("id").descending().and(Sort.by("lastname").ascending()));
+//        return candidateRepository.selectCandidateWilLocationAndLevel(name, pageWithSize);
     }
 }

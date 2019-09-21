@@ -66,8 +66,8 @@ public class CandidateController {
         return candidateService.getCandidatesWithStartDate();
     }
 
-    @RequestMapping(value = "/getCandidatesByQuery/{name}/{page}/{size}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<CandidateDTO> getCandidatesByQuery(@PathVariable("name") String name, @PathVariable("page") int page, @PathVariable("size") int size) {
-        return candidateService.getCandidateWithLocationAndLevel(name, page, size);
+    @PostMapping(value = "/getCandidatesByName", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Iterable<CandidateDTO> getCandidatesByQuery(@RequestBody CandidateSearchDTO candidateSearchDTO) {
+        return candidateService.getCandidateWithLocationAndLevel(candidateSearchDTO);
     }
 }
