@@ -66,7 +66,7 @@ public class CandidateController {
         return candidateService.getCandidatesWithStartDate();
     }
 
-    @PostMapping(value = "/getCandidatesByName", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/getCandidatesByName", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<CandidateDTO> getCandidatesByQuery(@RequestBody CandidateSearchDTO candidateSearchDTO) {
         return candidateService.getCandidateWithLocationAndLevel(candidateSearchDTO);
     }
