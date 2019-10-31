@@ -75,6 +75,4 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
     @Query(name = "SelectCandidateWithLocationAndLevel",
             nativeQuery = true)
     List<CandidateDTO> selectCandidateWilLocationAndLevel(@Param("name") String name, Pageable pageable);
-
-//    List<Candidate> findTop5ByActiveTrueAndCandidateStatusInAndStartDateNotNullOrderByStartDateDesc(Set<String> candidateStatuses);
 }

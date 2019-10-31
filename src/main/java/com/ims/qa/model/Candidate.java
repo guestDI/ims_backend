@@ -112,7 +112,7 @@ import java.util.Date;
 @NamedNativeQuery(
         name="SelectCandidateWithLocationAndLevel",
         query = "SELECT id, firstname, lastname, level, location from candidate\n" +
-                "where candidate_status != 'STARTED' and (lower(lastname) like ?1 or lower(firstname) like ?1)",
+                "where candidate_status != 'STARTED' and (lower(lastname) like lower(?1) or lower(firstname) like lower(?1))",
         resultSetMapping = "CandidateLocationLevel"
 )
 public class Candidate {

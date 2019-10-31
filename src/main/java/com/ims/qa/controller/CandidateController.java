@@ -4,10 +4,16 @@ import com.ims.qa.dto.*;
 import com.ims.qa.enums.CandidateStatus;
 import com.ims.qa.model.Candidate;
 import com.ims.qa.repository.CandidateRepository;
+import com.ims.qa.repository.CustomCandidateRepository;
+import com.ims.qa.repository.CustomCandidateRepositoryImpl;
 import com.ims.qa.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -19,6 +25,9 @@ public class CandidateController {
 
     @Autowired
     private CandidateRepository candidateRepository;
+
+    @Autowired
+    private CustomCandidateRepositoryImpl customCandidateRepository;
 
     @RequestMapping(value = "/getAllCandidates/{page}/{size}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Candidate> findAll(@PathVariable("page") int page, @PathVariable("size") int size) {
@@ -69,5 +78,10 @@ public class CandidateController {
     @PostMapping(value = "/getCandidatesByName", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<CandidateDTO> getCandidatesByQuery(@RequestBody CandidateSearchDTO candidateSearchDTO) {
         return candidateService.getCandidateWithLocationAndLevel(candidateSearchDTO);
+    }
+
+    @RequestMapping(value = "/filterCandidates", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Candidate>> filterCandidates(@RequestBody CandidateFilterDTO candidateFilterDTO) {
+        return new ResponseEntity<>(customCandidateRepository.filterCandidates(candidateFilterDTO), HttpStatus.OK);
     }
 }
