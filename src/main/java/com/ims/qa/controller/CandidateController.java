@@ -84,4 +84,9 @@ public class CandidateController {
     public ResponseEntity<List<Candidate>> filterCandidates(@RequestBody CandidateFilterDTO candidateFilterDTO) {
         return new ResponseEntity<>(customCandidateRepository.filterCandidates(candidateFilterDTO), HttpStatus.OK);
     }
+
+//    @RequestMapping(value = "/getNumberOfFilteredAllCandidates", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public Integer getNumberOfFilteredCandidates(){
+//        return candidateService.getNumberOfAllCandidates();
+//    }
 }
